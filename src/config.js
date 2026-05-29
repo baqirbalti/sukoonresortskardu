@@ -3,12 +3,12 @@
 // Update these values to customize your site
 // ============================================
 
-export const HOTEL_NAME = "Sukoon Resorts";
+export const HOTEL_NAME = "Sukoon Resort";
 export const HOTEL_TAGLINE = "Where the Mountains Meet Timeless Luxury";
-export const HOTEL_LOCATION = "Skardu, Gilgit-Baltistan, Pakistan";
+export const HOTEL_LOCATION = "Near Skardu International Airport, Sukoon Rd, Gayool, Skardu";
 export const HOTEL_EMAIL = "info@sukoonresorts.com";
-export const WHATSAPP_NUMBER = "923001234567"; // Replace with real number (no + sign)
-export const HOTEL_PHONE = "+92 300 123 4567";
+export const WHATSAPP_NUMBER = "923322785666"; // Replace with real number (no + sign)
+export const HOTEL_PHONE = "+92 332 2785666";
 
 // WhatsApp booking message builder
 export const buildBookingMessage = (roomName, checkIn, checkOut, guests) => {
