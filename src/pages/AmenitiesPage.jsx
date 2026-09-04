@@ -9,7 +9,7 @@ const AMENITIES = [
     icon: "🏊",
     title: "Outdoor Swimming Pool",
     desc: "Our signature pool, sculpted to follow the natural landscape, sits at the heart of the resort with breathtaking views of the snow-capped Karakoram. Heated during cooler months, it's open year-round for guests to enjoy the crisp mountain air.",
-    img: IMGS.gallery10,
+    img: IMGS.pool,
     from: "left",
   },
   {
@@ -23,7 +23,7 @@ const AMENITIES = [
     icon: "🚗",
     title: "Airport Transfer",
     desc: "Arrive in comfort. We arrange seamless pickup and drop-off service from Skardu Airport. Share your flight details at booking, and our team will be waiting for you.",
-    img: IMGS.ext01,
+    img: IMGS.airportimage,
     from: "left",
   },
   {
@@ -37,7 +37,7 @@ const AMENITIES = [
     icon: "🏔️",
     title: "Guided Mountain Treks",
     desc: "Explore the ancient valleys and towering peaks with our expert local guides. From gentle morning hikes to multi-day K2 base camp treks, we connect you to this extraordinary landscape at your own pace.",
-    img: IMGS.hero03,
+    img: IMGS.trackingimage,
     from: "left",
   },
   {

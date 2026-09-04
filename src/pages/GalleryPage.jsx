@@ -110,7 +110,7 @@ export default function GalleryPage({ setPage }) {
                   cursor: "zoom-in", overflow: "hidden", borderRadius: 2,
                   background: "#EDE0CE", position: "relative",
                   border: "1px solid #C8B49A",
-                  aspectRatio: i % 5 === 0 ? "3/4" : "4/3",
+                  aspectRatio: "4/3",
                 }}
               >
                 <img

@@ -34,7 +34,7 @@ const GoldenDivider = () => (
 // ── Hero Section ──────────────────────────────────────────────
 function HeroSection() {
   const [slide, setSlide] = useState(0);
-  const slides = [IMGS.hero02, IMGS.hero03, IMGS.hero01];
+  const slides = [IMGS.hero01, IMGS.hero03, IMGS.hero02];
 
   useEffect(() => {
     const t = setInterval(() => setSlide(s => (s + 1) % slides.length), 5500);
@@ -155,7 +155,7 @@ function WelcomeSection() {
           <QuickBookBar />
           <AnimBlock delay={0.2}>
             <div style={{ overflow: "hidden", borderRadius: 12, boxShadow: "0 12px 40px rgba(0,0,0,0.15)", marginTop: 20 }}>
-              <img src={IMGS.hero02} alt="Welcome to Sukoon Resorts" style={{ width: "100%", height: 450, objectFit: "cover", objectPosition: "center", display: "block" }} />
+              <img src={IMGS.ext02} alt="Welcome to Sukoon Resorts" style={{ width: "100%", height: 450, objectFit: "cover", objectPosition: "center", display: "block" }} />
             </div>
           </AnimBlock>
         </div>
