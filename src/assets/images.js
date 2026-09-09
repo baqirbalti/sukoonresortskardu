@@ -2,7 +2,7 @@
 
 // 1. Core Hotel Images (JPEG / JPG Formats)
 import logo from "./logo.jpeg"; // as you mentioned it's .jpeg
-import hero01 from "./hero01.png";
+import hero01 from "./hero01.jpg";
 import hero02 from "./hero02.png";
 import hero03 from "./hero03.png";
 import suite01 from "./suite01.jpg";
@@ -49,15 +49,15 @@ import fbedchalet07 from "./fbedchalet07.jpg";
 import fbedchalet08 from "./fbedchalet08.jpg";
 import fbedchalet09 from "./fbedchalet09.jpg";
 
-import excetivesuite02 from "./excetivesuite02.png";
+import exectivesuite02 from "./exectivesuite02.jpg";
 import familyvilla1 from "./familyvilla1.jpg";
 import familyvilla02 from "./familyvilla02.jpg";
 
 // 3. Gallery, Pool & Exterior (JPG Formats)
-import gallery03 from "./gallery03.png";
+import gallery03 from "./gallery03.jpg";
 import pool from "./pool.jpg";
-import gallery16 from "./gallery16.png";
-import ext02 from "./ext02.png";
+import gallery16 from "./gallery16.jpg";
+import ext02 from "./ext02.jpg";
 import exteriorfullview from "./exteriorfullview.jpg";
 
 // 4. Guest Review Images (PNG Formats)
@@ -76,7 +76,7 @@ export const IMGS = {
   room4,
   exectiveroom1,
   exectiveroom01,
-  excetivesuite02,
+  exectivesuite02,
   executivevilla03,
   executivevilla04,
   executivevilla05,
@@ -109,7 +109,6 @@ export const IMGS = {
   fbedchalet09,
   pool,
   exteriorfullview,
-  ext01: exteriorfullview,
   familyvilla1,
   familyvilla02,
   gallery03,

@@ -170,7 +170,7 @@ export const GALLERY_CATEGORIES = [
 ];
 
 export const GALLERY_IMAGES = [
-  { id: 1, src: IMGS.excetivesuite02, category: "exterior", caption: "Resort overview with Skardu backdrop", alt: "Aerial view of Sukoon Resorts" },
+  { id: 1, src: IMGS.exectivesuite02, category: "exterior", caption: "Resort overview with Skardu backdrop", alt: "Aerial view of Sukoon Resorts" },
   { id: 2, src: IMGS.ext02, category: "exterior", caption: "Fort-style building exterior at dusk", alt: "Fort-style building" },
   { id: 3, src: IMGS.hero01, category: "exterior", caption: "The resort grounds and outdoor pool", alt: "Resort grounds" },
   { id: 4, src: IMGS.hero02, category: "exterior", caption: "Circular huts at twilight", alt: "Circular huts at night" },
