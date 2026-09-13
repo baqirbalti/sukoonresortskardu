@@ -154,8 +154,10 @@ function WelcomeSection() {
           </AnimBlock>
           <QuickBookBar />
           <AnimBlock delay={0.2}>
+            {/* aspect-ratio instead of a fixed pixel height — keeps the same
+                widescreen look on desktop without stretching tall on mobile */}
             <div style={{ overflow: "hidden", borderRadius: 12, boxShadow: "0 12px 40px rgba(0,0,0,0.15)", marginTop: 20 }}>
-              <img src={IMGS.ext02} alt="Welcome to Sukoon Resorts" style={{ width: "100%", height: 450, objectFit: "cover", objectPosition: "center", display: "block" }} />
+              <img src={IMGS.ext02} alt="Welcome to Sukoon Resorts" loading="lazy" style={{ width: "100%", aspectRatio: "21/9", objectFit: "cover", objectPosition: "center", display: "block" }} />
             </div>
           </AnimBlock>
         </div>
@@ -233,6 +235,7 @@ function DiningHighlight() {
             <img
               src={IMGS.gallery02}
               alt="Heritage Restaurant"
+              loading="lazy"
               style={{ width: "100%", borderRadius: 8, boxShadow: "0 10px 30px rgba(0,0,0,0.08)", objectFit: "cover", aspectRatio: "4/3", display: "block" }}
             />
           </AnimBlock>
@@ -372,7 +375,7 @@ function BookingReviews() {
           
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "24px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-              <img src={IMGS.hero02} alt="Resort Thumbnail" style={{ width: "90px", height: "60px", objectFit: "cover", borderRadius: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }} />
+              <img src={IMGS.hero02} alt="Resort Thumbnail" loading="lazy" style={{ width: "90px", height: "60px", objectFit: "cover", borderRadius: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }} />
               <div>
                 <h3 style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "28px", fontWeight: "bold", color: "#1C1209", margin: "0 0 4px" }}>Sukoon Resorts</h3>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -418,7 +421,7 @@ function BookingReviews() {
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
                       {rev.avatarImg ? (
-                        <img src={rev.avatarImg} alt={rev.name} style={{ width: "46px", height: "46px", borderRadius: "50%", objectFit: "cover" }} />
+                        <img src={rev.avatarImg} alt={rev.name} loading="lazy" style={{ width: "46px", height: "46px", borderRadius: "50%", objectFit: "cover" }} />
                       ) : (
                         <div style={{ width: "46px", height: "46px", borderRadius: "50%", background: rev.avatarColor, color: "#FFFFFF", display: "flex", justifyContent: "center", alignItems: "center", fontWeight: "bold", fontSize: "16px", fontFamily: "Lato, sans-serif" }}>
                           {rev.initial}

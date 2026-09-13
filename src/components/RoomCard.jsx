@@ -33,12 +33,14 @@ export default function RoomCard({ room, setPage, setRoomId, delay = 0 }) {
           e.currentTarget.style.boxShadow = "0 10px 40px rgba(0,0,0,0.06)";
         }}
       >
-        {/* 1. Image Section */}
-        <div style={{ position: "relative", height: 260 }}>
+        {/* 1. Image Section — aspect-ratio instead of a fixed pixel height so
+            it scales proportionally on mobile instead of stretching vertically */}
+        <div style={{ position: "relative" }}>
           <img
             src={room.heroImg}
             alt={room.name}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            loading="lazy"
+            style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" }}
           />
           {/* Category Badge */}
           <div style={{

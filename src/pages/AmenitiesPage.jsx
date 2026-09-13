@@ -102,13 +102,13 @@ export default function AmenitiesPage({ setPage }) {
                   </div>
                 </AnimBlock>
                 <AnimBlock from="right">
-                  <img src={img} alt={title} style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", objectPosition: "center", boxShadow: "6px 6px 0 #C4922A", background: "#EDE0CE" }} />
+                  <img src={img} alt={title} loading="lazy" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", objectPosition: "center", boxShadow: "6px 6px 0 #C4922A", background: "#EDE0CE" }} />
                 </AnimBlock>
               </>
             ) : (
               <>
                 <AnimBlock from="left">
-                  <img src={img} alt={title} style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", objectPosition: "center", boxShadow: "-6px 6px 0 #C4922A", background: "#EDE0CE" }} />
+                  <img src={img} alt={title} loading="lazy" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", objectPosition: "center", boxShadow: "-6px 6px 0 #C4922A", background: "#EDE0CE" }} />
                 </AnimBlock>
                 <AnimBlock from="right">
                   <div>

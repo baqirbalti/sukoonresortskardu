@@ -18,10 +18,10 @@ export const ROOMS = [
     id: "Executive-Villa",
     name: "Executive Villa",
     category: "Villa",
-    price: "PKR 15,000",
-    priceNum: 15000,
+    price: "PKR 13,000",
+    priceNum: 13000,
     // Added back for the RoomCard:
-    beds: "1 Double",
+    beds: "1 Double/ 2 Twins",
     size: "34 m² / 366 sqft",
     view: "Mountain View",
     heroImg: IMGS.hero02,
@@ -52,10 +52,12 @@ export const ROOMS = [
     id: "deluxe luxary suite",
     name: "Deluxe Luxary Suite",
     category: "Deluxe",
-    price: "PKR 20,000",
-    priceNum: 20000,
+    price: "PKR 19,000",
+    priceAC: "PKR 22,000",
+    priceNum: 19000,
+    priceACNum: 22000,
     // Added back for the RoomCard:
-    beds: "1 Double, 2 Futons",
+    beds: "1 Double/ 2 Twins",
     size: "73 m² / 787 sqft",
     view: "Mountain & Pool View",
 
@@ -65,7 +67,7 @@ export const ROOMS = [
     longDesc: "Unique round design, airy living space, and stylish lounge setup—ideal for up to 4 adults to unwind and enjoy a serene Skardu escape.",
     measurements: [
       "Total Area: 72 m²",
-      "Bedroom 1: 1 Extra-large double bed & 2 Futon beds",
+      "Bedroom 1: 1 Extra-large double bed / 2 Twins",
     ],
     facilities: [
       "Balcony with Mountain, Pool & Garden views",
@@ -86,30 +88,32 @@ export const ROOMS = [
     id: "4 Bed Chalet",
     name: "4 Bed Chalet",
     category: "Chalet",
-    price: "PKR 40,000",
-    priceNum: 40000,
+    price: "PKR 54,000",
+    priceNum: 54000,
     // Added back for the RoomCard:
-    beds: "1 Double, 2 Futons",
-    size: "72 m²",
+    beds: " 2 Bedrooms ",
+    size: "91 m²/979 ft²",
     view: "Private Patio View",
 
     heroImg: IMGS.fbedchalet09,
     gallery: [IMGS.fbedchalet09, IMGS.fbedchalet01, IMGS.fbedchalet02, IMGS.fbedchalet04, IMGS.fbedchalet06, IMGS.fbedchalet07, IMGS.fbedchalet08],
     desc: "Premium comfort featuring climate control and private patio access.",
-    longDesc: "The Deluxe King Suite blends traditional charm with modern necessities like air-conditioning. Step out onto your private patio to enjoy the crisp mountain air and sweeping valley views.",
+    longDesc: "4-Bed Chalet with a spacious multi-room layout, cozy central seating area, and a perfect setup for groups or families—offering comfort, privacy, and a relaxed stay.",
     measurements: [
-      "Total Area: 72 m²",
-      "Bedroom 1: 1 Extra-large double bed & 2 Futon beds",
-      "Living Room: 1 Sofa bed"
+      "Total Area: 91 m²/979 ft²",
+      "Bedroom 1: 1 Extra-large double bed",
+      "Bedroom 2: 1 Extra-large double bed",
+      "Additional: Round communal seating area"
     ],
     facilities: [
-      "Air conditioning",
-      "Private Patio with Barbecue",
-      "Mountain, Pool & Garden views",
-      "Dedicated Seating Area & Desk",
-      "Electric kettle",
-      "Entire unit located on ground floor",
-      "Entire unit wheelchair accessible"
+      "Wardrobe/storage space",
+      "Cozy central seating area",
+      "Free premium toiletries",
+      "Shower & En-suite Toilet",
+      "Landmark & Inner Courtyard View",
+      "Private entrance",
+      "Entire unit located on ground floor"
+
     ],
     amenities: COMMON_AMENITIES,
     extra: [
@@ -122,11 +126,11 @@ export const ROOMS = [
     id: "king-suite",
     name: "King Suite",
     category: "Suite",
-    price: "PKR 50,000",
-    priceNum: 50000,
+    price: "PKR 28,000",
+    priceNum: 28000,
     // Added back for the RoomCard:
     beds: "2 Bedrooms",
-    size: "91 m²",
+    size: "73 m²/786 ft²",
     view: "Panoramic View",
 
     heroImg: IMGS.kingsuite01,
@@ -134,19 +138,17 @@ export const ROOMS = [
     desc: "Our largest accommodation, offering multiple bedrooms for ultimate privacy.",
     longDesc: "The pinnacle of Sukoon Resorts. The King Suite offers two separate bedrooms and a spacious living room. It's the perfect sanctuary for large families seeking the highest level of comfort and privacy in the Karakoram.",
     measurements: [
-      "Total Area: 91 m²",
+      "Total Area: 73 m²/786 ft²",
       "Bedroom 1: 1 Extra-large double bed",
-      "Bedroom 2: 2 Single beds",
-      "Living Room: 1 Sofa bed"
+      "Bedroom 2: 2 Single beds"
     ],
     facilities: [
-      "Interconnected room(s) available",
-      "Balcony & Private Patio",
-      "Mountain, Pool & Landmark views",
       "Dedicated Seating Area",
       "Ensuite bathroom",
-      "Terrace access & Barbecue",
-      "Entire unit located on ground floor"
+      "Free premium toiletries",
+      "Landmark & Inner Courtyard View",
+      "Private entrance"
+
     ],
     amenities: COMMON_AMENITIES,
     extra: [

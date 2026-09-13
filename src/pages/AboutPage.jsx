@@ -57,7 +57,7 @@ export default function AboutPage({ setPage }) {
       <section style={{ background: "#EDE0CE", padding: "80px 32px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
           <AnimBlock from="left">
-            <img src={IMGS.ext02} alt="Heritage fort exterior" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", boxShadow: "6px 6px 0 #C4922A", background: "#EDE0CE" }} />
+            <img src={IMGS.ext02} alt="Heritage fort exterior" loading="lazy" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", boxShadow: "6px 6px 0 #C4922A", background: "#EDE0CE" }} />
           </AnimBlock>
           <AnimBlock from="right">
             <p className="section-label">OUR DESIGN PHILOSOPHY</p>

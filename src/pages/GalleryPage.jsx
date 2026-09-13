@@ -2,51 +2,8 @@
 import { useState } from "react";
 import AnimBlock from "../components/AnimBlock.jsx";
 import Footer from "../components/Footer.jsx";
+import Lightbox from "../components/Lightbox.jsx";
 import { GALLERY_IMAGES, GALLERY_CATEGORIES } from "../data/rooms.js";
-
-// ── Lightbox ──────────────────────────────────────────────────
-function Lightbox({ images, startIndex, onClose }) {
-  const [idx, setIdx] = useState(startIndex);
-  const img = images[idx];
-
-  return (
-    <div
-      onClick={onClose}
-      style={{ position: "fixed", inset: 0, background: "rgba(18,10,4,0.97)", zIndex: 500, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
-    >
-      <button onClick={onClose} style={{ position: "absolute", top: 20, right: 28, background: "none", border: "none", color: "#F5EFE6", fontSize: 36, cursor: "pointer", zIndex: 10 }}>✕</button>
-
-      {/* Prev */}
-      <button onClick={e => { e.stopPropagation(); setIdx(i => (i - 1 + images.length) % images.length); }}
-        style={{ position: "absolute", left: 16, background: "none", border: "none", color: "#C4922A", fontSize: 52, cursor: "pointer", zIndex: 10, lineHeight: 1 }}>‹</button>
-
-      <img
-        src={img.src}
-        alt={img.alt}
-        onClick={e => e.stopPropagation()}
-        style={{ maxWidth: "88vw", maxHeight: "82vh", objectFit: "contain", boxShadow: "0 0 80px rgba(0,0,0,0.9)" }}
-      />
-
-      {/* Caption */}
-      <div style={{ marginTop: 16, textAlign: "center" }} onClick={e => e.stopPropagation()}>
-        <p style={{ fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", fontSize: 18, color: "#EDE0CE", margin: "0 0 4px" }}>{img.caption}</p>
-        <p style={{ fontFamily: "Lato, sans-serif", fontSize: 11, letterSpacing: 2, color: "#C4922A", margin: 0 }}>{idx + 1} / {images.length}</p>
-      </div>
-
-      {/* Next */}
-      <button onClick={e => { e.stopPropagation(); setIdx(i => (i + 1) % images.length); }}
-        style={{ position: "absolute", right: 16, background: "none", border: "none", color: "#C4922A", fontSize: 52, cursor: "pointer", zIndex: 10, lineHeight: 1 }}>›</button>
-
-      {/* Dots */}
-      <div style={{ position: "absolute", bottom: 20, display: "flex", gap: 7, flexWrap: "wrap", justifyContent: "center", maxWidth: "80vw" }}>
-        {images.map((_, i) => (
-          <button key={i} onClick={e => { e.stopPropagation(); setIdx(i); }}
-            style={{ width: i === idx ? 22 : 7, height: 7, borderRadius: 4, background: i === idx ? "#C4922A" : "rgba(245,239,230,0.3)", border: "none", cursor: "pointer", transition: "all 0.3s" }} />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ── Main Page ─────────────────────────────────────────────────
 export default function GalleryPage({ setPage }) {
@@ -116,6 +73,7 @@ export default function GalleryPage({ setPage }) {
                 <img
                   src={img.src}
                   alt={img.alt}
+                  loading="lazy"
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", transition: "transform 0.55s ease" }}
                   onMouseOver={e => e.target.style.transform = "scale(1.07)"}
                   onMouseOut={e => e.target.style.transform = "scale(1)"}
