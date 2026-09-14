@@ -5,11 +5,12 @@
 // rooms/categories before submitting a single combined request.
 //
 // Rooms that have both a Non-AC and an AC price (see `priceAC`/`priceACNum`
-// in data/rooms.js) show a small toggle so the guest picks which rate
-// applies — that choice drives the live total and is what gets saved to
-// the sheet/email, no separate "AC version" room entry needed.
+// in data/rooms.js) are shown as TWO separate rows — one per rate — each
+// with its own quantity counter. That way a guest can book, say, 1 Non-AC
+// unit AND 1 With-AC unit of the same room in one request, instead of a
+// single toggle forcing the whole quantity onto one rate.
 import { useState, useMemo } from "react";
-import { ROOMS } from "../data/rooms.js";
+import { getRoomVariants } from "../data/rooms.js";
 import { submitBookingToSheet, todayStr } from "../config.js";
 
 const qtyBtnStyle = {
@@ -25,21 +26,14 @@ const inputStyle = {
 };
 const labelStyle = { display: "block", fontSize: 12, fontWeight: 700, color: "#555", marginBottom: 6, fontFamily: "Lato, sans-serif" };
 
-const pillStyle = (active) => ({
-  padding: "4px 12px", borderRadius: 20, fontSize: 11, fontFamily: "Lato, sans-serif",
-  fontWeight: 700, cursor: "pointer",
-  border: active ? "1px solid #984A1C" : "1px solid #D8CBB4",
-  background: active ? "#984A1C" : "#FFFFFF",
-  color: active ? "#FFFFFF" : "#8C7B6B",
-});
-
 const formatPKR = (n) => `PKR ${Math.round(n).toLocaleString("en-PK")}`;
 
 export default function MultiRoomBookingModal({ onClose, onSuccess, initialQuantities = {} }) {
+  // Each ROOM can expand into 1 or 2 bookable rows (variants) — quantities
+  // are tracked per variant key, e.g. "deluxe luxary suite::AC", so the
+  // Non-AC and With-AC rows of the same room never share a counter.
+  const variants = useMemo(() => getRoomVariants(), []);
   const [quantities, setQuantities] = useState(initialQuantities);
-  // Which rate (Non-AC / AC) is picked per room — only matters for rooms
-  // that actually have a priceAC option; defaults to Non-AC.
-  const [acChoice, setAcChoice] = useState({});
   const [formData, setFormData] = useState({
     firstName: "", lastName: "", email: "", phone: "", whatsapp: "", checkIn: "", checkOut: "", adults: "1", children: "0",
   });
@@ -48,31 +42,25 @@ export default function MultiRoomBookingModal({ onClose, onSuccess, initialQuant
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const changeQty = (roomId, delta) => {
+  const changeQty = (key, delta) => {
     setQuantities(q => {
-      const next = Math.max(0, (q[roomId] || 0) + delta);
-      return { ...q, [roomId]: next };
+      const next = Math.max(0, (q[key] || 0) + delta);
+      return { ...q, [key]: next };
     });
     setError("");
   };
 
-  const isAC = (roomId) => acChoice[roomId] === "AC";
+  const label = (v) => v.variantLabel ? `${v.room.name} (${v.variantLabel})` : v.room.name;
 
-  // Price for one unit of a room, respecting its Non-AC/AC selection
-  const unitPrice = (room) => (isAC(room.id) && room.priceACNum) ? room.priceACNum : (room.priceNum || 0);
-
-  const roomLabel = (room) => room.priceAC ? `${room.name} (${isAC(room.id) ? "With AC" : "Non AC"})` : room.name;
-
-  const selectedRooms = useMemo(
-    () => ROOMS.filter(r => (quantities[r.id] || 0) > 0),
-    [quantities]
+  const selectedVariants = useMemo(
+    () => variants.filter(v => (quantities[v.key] || 0) > 0),
+    [variants, quantities]
   );
-  const totalRooms = selectedRooms.reduce((sum, r) => sum + (quantities[r.id] || 0), 0);
+  const totalRooms = selectedVariants.reduce((sum, v) => sum + (quantities[v.key] || 0), 0);
 
-  // Nightly total = sum of (price per night × quantity) across all selected rooms,
-  // using each room's chosen Non-AC/AC rate.
-  const nightlyTotal = selectedRooms.reduce(
-    (sum, r) => sum + unitPrice(r) * (quantities[r.id] || 0),
+  // Nightly total = sum of (rate × quantity) across every selected row
+  const nightlyTotal = selectedVariants.reduce(
+    (sum, v) => sum + (v.price || 0) * (quantities[v.key] || 0),
     0
   );
 
@@ -90,7 +78,7 @@ export default function MultiRoomBookingModal({ onClose, onSuccess, initialQuant
     e.preventDefault();
     if (submitting) return;
 
-    if (selectedRooms.length === 0) {
+    if (selectedVariants.length === 0) {
       setError("Please select at least one room before submitting.");
       return;
     }
@@ -98,8 +86,8 @@ export default function MultiRoomBookingModal({ onClose, onSuccess, initialQuant
     setError("");
     setSubmitting(true);
 
-    const roomSummary = selectedRooms
-      .map(r => `${roomLabel(r)} x${quantities[r.id]}`)
+    const roomSummary = selectedVariants
+      .map(v => `${label(v)} x${quantities[v.key]}`)
       .join(", ");
 
     // Fire-and-forget — see config.js for why we don't await this.
@@ -140,40 +128,33 @@ export default function MultiRoomBookingModal({ onClose, onSuccess, initialQuant
             1. Select Rooms
           </p>
           <div style={{ border: "1px solid #EDE6D8", borderRadius: 8, padding: "4px 16px", marginBottom: 20, background: "#FFFFFF" }}>
-            {ROOMS.map(room => (
-              <div key={room.id} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 0", borderBottom: "1px solid #F1ECE1", flexWrap: "wrap" }}>
+            {variants.map(v => (
+              <div key={v.key} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 0", borderBottom: "1px solid #F1ECE1" }}>
                 <img
-                  src={room.heroImg}
-                  alt={room.name}
+                  src={v.room.heroImg}
+                  alt={v.room.name}
                   loading="lazy"
                   style={{ width: 64, aspectRatio: "4/3", objectFit: "cover", borderRadius: 6, flexShrink: 0 }}
                 />
-                <div style={{ flex: 1, minWidth: 160 }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <p style={{ margin: "0 0 2px", fontFamily: "Cormorant Garamond, serif", fontSize: 17, color: "#1C1209", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {room.name}
+                    {v.room.name}
+                    {v.variantLabel && (
+                      <span style={{ fontFamily: "Lato, sans-serif", fontSize: 11, fontWeight: 700, color: "#984A1C", marginLeft: 8, letterSpacing: 0.5 }}>
+                        {v.variantLabel.toUpperCase()}
+                      </span>
+                    )}
                   </p>
-                  <p style={{ margin: room.priceAC ? "0 0 8px" : 0, fontFamily: "Lato, sans-serif", fontSize: 12, color: "#8C7B6B" }}>
-                    {room.category} · {formatPKR(unitPrice(room))} / night
+                  <p style={{ margin: 0, fontFamily: "Lato, sans-serif", fontSize: 12, color: "#8C7B6B" }}>
+                    {v.room.category} · {formatPKR(v.price)} / night
                   </p>
-
-                  {/* Non-AC / With-AC rate toggle — only shown for rooms that have both */}
-                  {room.priceAC && (
-                    <div style={{ display: "flex", gap: 6 }}>
-                      <button type="button" onClick={() => setAcChoice(a => ({ ...a, [room.id]: "nonAC" }))} style={pillStyle(!isAC(room.id))}>
-                        Non AC
-                      </button>
-                      <button type="button" onClick={() => setAcChoice(a => ({ ...a, [room.id]: "AC" }))} style={pillStyle(isAC(room.id))}>
-                        With AC
-                      </button>
-                    </div>
-                  )}
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
-                  <button type="button" onClick={() => changeQty(room.id, -1)} style={qtyBtnStyle}>−</button>
+                  <button type="button" onClick={() => changeQty(v.key, -1)} style={qtyBtnStyle}>−</button>
                   <span style={{ minWidth: 16, textAlign: "center", fontFamily: "Lato, sans-serif", fontWeight: 700, color: "#1C1209" }}>
-                    {quantities[room.id] || 0}
+                    {quantities[v.key] || 0}
                   </span>
-                  <button type="button" onClick={() => changeQty(room.id, 1)} style={qtyBtnStyle}>+</button>
+                  <button type="button" onClick={() => changeQty(v.key, 1)} style={qtyBtnStyle}>+</button>
                 </div>
               </div>
             ))}
@@ -185,13 +166,13 @@ export default function MultiRoomBookingModal({ onClose, onSuccess, initialQuant
               <p style={{ margin: "0 0 8px", fontFamily: "Lato, sans-serif", fontSize: 11, letterSpacing: 1, color: "#984A1C", fontWeight: 700, textTransform: "uppercase" }}>
                 Your Selection ({totalRooms} room{totalRooms > 1 ? "s" : ""})
               </p>
-              {selectedRooms.map(r => (
-                <div key={r.id} style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+              {selectedVariants.map(v => (
+                <div key={v.key} style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
                   <p style={{ margin: 0, fontFamily: "Lato, sans-serif", fontSize: 14, color: "#333" }}>
-                    {roomLabel(r)} <span style={{ color: "#8C7B6B" }}>× {quantities[r.id]}</span>
+                    {label(v)} <span style={{ color: "#8C7B6B" }}>× {quantities[v.key]}</span>
                   </p>
                   <p style={{ margin: 0, fontFamily: "Lato, sans-serif", fontSize: 14, color: "#555" }}>
-                    {formatPKR(unitPrice(r) * quantities[r.id])}{nights > 0 ? " /night" : ""}
+                    {formatPKR(v.price * quantities[v.key])}{nights > 0 ? " /night" : ""}
                   </p>
                 </div>
               ))}

@@ -160,6 +160,32 @@ export const ROOMS = [
 ];
 
 // ============================================
+// Booking-form helpers — turn each room into one or more selectable
+// "variants" (Non AC / With AC), so a guest can pick different
+// quantities of each rate for the same room independently.
+// Any room can get a second rate later just by adding priceAC +
+// priceACNum to its entry above — no other code needs to change.
+// ============================================
+export function getRoomVariants() {
+  const variants = [];
+  ROOMS.forEach(room => {
+    if (room.priceAC) {
+      variants.push({ key: `${room.id}::nonAC`, roomId: room.id, room, variantLabel: "Non AC", price: room.priceNum });
+      variants.push({ key: `${room.id}::AC`, roomId: room.id, room, variantLabel: "With AC", price: room.priceACNum });
+    } else {
+      variants.push({ key: `${room.id}::default`, roomId: room.id, room, variantLabel: null, price: room.priceNum });
+    }
+  });
+  return variants;
+}
+
+// Which variant key a room's own "Book This Room" button should
+// pre-select (always the Non-AC / base rate when the room has one).
+export function defaultVariantKey(room) {
+  return room.priceAC ? `${room.id}::nonAC` : `${room.id}::default`;
+}
+
+// ============================================
 // DO NOT DELETE: Required for the Gallery Page
 // ============================================
 export const GALLERY_CATEGORIES = [

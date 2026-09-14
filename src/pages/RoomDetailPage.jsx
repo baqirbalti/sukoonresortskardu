@@ -5,7 +5,7 @@ import Footer from "../components/Footer.jsx";
 import Lightbox from "../components/Lightbox.jsx";
 import ThankYouModal from "../components/ThankYouModal.jsx";
 import MultiRoomBookingModal from "../components/MultiRoomBookingModal.jsx";
-import { ROOMS } from "../data/rooms.js";
+import { ROOMS, defaultVariantKey } from "../data/rooms.js";
 
 // ── Reusable Info Box Component ───────────────────────────────
 function InfoBox({ title, items, children }) {
@@ -135,11 +135,11 @@ export default function RoomDetailPage({ roomId, setPage }) {
       </div>
 
       {/* Modals — same single booking route as the Navbar's "BOOK NOW",
-          just opened here with this room pre-selected so the guest can
-          still add other rooms/categories before submitting. */}
+          just opened here with this room's base (Non-AC) rate pre-selected
+          so the guest can still add other rooms/rates before submitting. */}
       {isBookingOpen && (
         <MultiRoomBookingModal
-          initialQuantities={{ [room.id]: 1 }}
+          initialQuantities={{ [defaultVariantKey(room)]: 1 }}
           onClose={() => setIsBookingOpen(false)}
           onSuccess={() => { setIsBookingOpen(false); setIsThankYouOpen(true); }}
         />
