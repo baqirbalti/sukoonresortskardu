@@ -140,6 +140,7 @@ export default function RoomDetailPage({ roomId, setPage }) {
       {isBookingOpen && (
         <MultiRoomBookingModal
           initialQuantities={{ [defaultVariantKey(room)]: 1 }}
+          primaryRoomId={room.id}
           onClose={() => setIsBookingOpen(false)}
           onSuccess={() => { setIsBookingOpen(false); setIsThankYouOpen(true); }}
         />

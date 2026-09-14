@@ -24,6 +24,12 @@ export const ROOMS = [
     beds: "1 Double/ 2 Twins",
     size: "34 m² / 366 sqft",
     view: "Mountain View",
+    // Max guests this room sleeps, and its extra-mattress policy — edit
+    // these two numbers any time the client changes capacity/pricing and
+    // it updates everywhere this room is booked (booking form, sheet, etc).
+    capacity: 2,
+    maxMattress: 2,
+    mattressPrice: 3000,
     heroImg: IMGS.hero02,
     gallery: [IMGS.hero02, IMGS.executivevilla03, IMGS.executivevilla02, IMGS.executivevilla04, IMGS.executivevilla05, IMGS.executivevilla06, IMGS.executivevilla07],
     desc: "A cozy and elegant space perfectly suited for a peaceful getaway.",
@@ -60,6 +66,9 @@ export const ROOMS = [
     beds: "1 Double/ 2 Twins",
     size: "73 m² / 787 sqft",
     view: "Mountain & Pool View",
+    capacity: 2,
+    maxMattress: 2,
+    mattressPrice: 3000,
 
     heroImg: IMGS.hero03,
     gallery: [IMGS.hero03, IMGS.deluxeluxarysuite01, IMGS.deluxeluxarysuite02, IMGS.deluxeluxarysuite03, IMGS.deluxeluxarysuite04, IMGS.deluxeluxarysuite05, IMGS.deluxeluxarysuite06, IMGS.deluxeluxarysuite07, IMGS.deluxeluxarysuite08, IMGS.deluxeluxarysuite0],
@@ -94,6 +103,9 @@ export const ROOMS = [
     beds: " 2 Bedrooms ",
     size: "91 m²/979 ft²",
     view: "Private Patio View",
+    capacity: 8,
+    maxMattress: 2,
+    mattressPrice: 3000,
 
     heroImg: IMGS.fbedchalet09,
     gallery: [IMGS.fbedchalet09, IMGS.fbedchalet01, IMGS.fbedchalet02, IMGS.fbedchalet04, IMGS.fbedchalet06, IMGS.fbedchalet07, IMGS.fbedchalet08],
@@ -132,6 +144,9 @@ export const ROOMS = [
     beds: "2 Bedrooms",
     size: "73 m²/786 ft²",
     view: "Panoramic View",
+    capacity: 4,
+    maxMattress: 2,
+    mattressPrice: 3000,
 
     heroImg: IMGS.kingsuite01,
     gallery: [IMGS.kingsuite01, IMGS.kingsuite02, IMGS.kingsuite03,   IMGS.kingsuite04, IMGS.kingsuite05, IMGS.kingsuite06],
